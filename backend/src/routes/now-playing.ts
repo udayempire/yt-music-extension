@@ -1,9 +1,25 @@
 import express from "express";
-import type { NowPlayingUpdateRequest } from "../../../shared/types/now-playing.js";
 import {
   getNowPlayingByChannelId,
   upsertNowPlaying
 } from "../services/store.js";
+
+export type NowPlayingState = {
+  channelId: string;
+  title: string;
+  artists: string;
+  coverUrl: string | null;
+  songUrl: string | null;
+  isPlaying: boolean;
+  positionSec: number;
+  durationSec: number;
+  playedAt: number;
+};
+
+export type NowPlayingUpdateRequest = {
+  source: "ytmusic-extension";
+  data: NowPlayingState;
+};
 
 const router = express.Router();
 

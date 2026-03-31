@@ -1,7 +1,7 @@
 import type { NowPlayingState } from "../../shared/types/now-playing";
 import type { NowPlayingUpdateMessage } from "./types";
 
-const CHANNEL_ID = "uday-portfolio";
+const CHANNEL_ID = "yt-music";
 const PUSH_INTERVAL_MS = 3000;
 
 const SELECTORS = {
