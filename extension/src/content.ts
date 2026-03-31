@@ -7,7 +7,10 @@ const PUSH_INTERVAL_MS = 3000;
 const SELECTORS = {
   title: "ytmusic-player-bar .title",
   byline: "ytmusic-player-bar .byline",
-  coverImage: "ytmusic-player-bar img.image"
+  coverImage: "ytmusic-player-bar img.image",
+  titleLink: "ytmusic-player-bar a.title",
+  playerBarWatchLink: "ytmusic-player-bar a[href*='watch?v=']",
+  currentTrackLink: "a[href*='watch?v='][aria-label]"
 };
 
 function textFrom(selector: string): string {
@@ -42,11 +45,51 @@ function readNowPlaying(): NowPlayingState | null {
     title,
     artists,
     coverUrl,
+    songUrl: getSongUrl(),
     isPlaying,
     positionSec,
     durationSec,
     playedAt: Date.now()
   };
+}
+
+function getSongUrl(): string | null {
+  const candidates = [
+    SELECTORS.titleLink,
+    SELECTORS.playerBarWatchLink,
+    SELECTORS.currentTrackLink
+  ];
+
+  for (const selector of candidates) {
+    const el = document.querySelector<HTMLAnchorElement>(selector);
+    const href = el?.getAttribute("href");
+    if (!href) continue;
+
+    const resolved = resolveMusicUrl(href);
+    if (resolved) return resolved;
+  }
+
+  return getSongUrlFromCurrentPage();
+}
+
+function resolveMusicUrl(href: string): string | null {
+  try {
+    const url = new URL(href, "https://music.youtube.com");
+    if (!url.searchParams.get("v")) return null;
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
+function getSongUrlFromCurrentPage(): string | null {
+  try {
+    const current = new URL(window.location.href);
+    if (!current.searchParams.get("v")) return null;
+    return current.toString();
+  } catch {
+    return null;
+  }
 }
 
 let lastSignature = "";
@@ -73,6 +116,7 @@ function signatureFor(state: NowPlayingState): string {
     title: state.title,
     artists: state.artists,
     coverUrl: state.coverUrl,
+    songUrl: state.songUrl,
     isPlaying: state.isPlaying,
     positionSec: state.positionSec,
     durationSec: state.durationSec
