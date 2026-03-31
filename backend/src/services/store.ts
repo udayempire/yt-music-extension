@@ -1,4 +1,4 @@
-import { NowPlayingState } from "../../../shared/types/now-playing";
+import type { NowPlayingState } from "../../../shared/types/now-playing.js";
 
 const nowPlayingByChannel = new Map<string, NowPlayingState>();
 

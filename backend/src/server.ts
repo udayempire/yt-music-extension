@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import nowPlayingRouter from "./routes/now-playing";
+import nowPlayingRouter from "./routes/now-playing.js";
 
 const app = express();
 
