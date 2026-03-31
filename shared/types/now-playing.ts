@@ -3,6 +3,7 @@ export type NowPlayingState = {
   title: string;
   artists: string;
   coverUrl: string | null;
+  songUrl: string | null;
   isPlaying: boolean;
   positionSec: number;
   durationSec: number;

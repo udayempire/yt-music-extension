@@ -8,6 +8,7 @@ app.use(
     cors({
         origin: [
             "chrome-extension://phpdheidlnnipcfffbhiddfmpikedahm",
+            "http://localhost:3000",
             "http://localhost:5173"
         ],
         methods: ["GET", "POST", "OPTIONS"],
