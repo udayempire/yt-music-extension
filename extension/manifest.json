@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "YT Music Now Playing",
+  "version": "1.0",
+  "permissions": [],
+  "host_permissions": ["https://music.youtube.com/*", "http://localhost:4000/*"],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://music.youtube.com/*"],
+      "js": ["dist/content.js"]
+    }
+  ]
+}
