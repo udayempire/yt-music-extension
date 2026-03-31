@@ -9,7 +9,8 @@ app.use(
         origin: [
             "chrome-extension://phpdheidlnnipcfffbhiddfmpikedahm",
             "http://localhost:3000",
-            "http://localhost:5173"
+            "http://localhost:5173",
+            "https://udayempire.me",
         ],
         methods: ["GET", "POST", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"]
