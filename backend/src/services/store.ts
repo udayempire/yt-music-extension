@@ -1,3 +1,12 @@
+export function getLastNowPlaying(): NowPlayingState | null {
+  let latest: NowPlayingState | null = null;
+  for (const state of nowPlayingByChannel.values()) {
+    if (!latest || state.playedAt > latest.playedAt) {
+      latest = state;
+    }
+  }
+  return latest;
+}
 export type NowPlayingState = {
   channelId: string;
   title: string;

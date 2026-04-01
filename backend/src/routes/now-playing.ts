@@ -1,7 +1,8 @@
 import express from "express";
 import {
   getNowPlayingByChannelId,
-  upsertNowPlaying
+  upsertNowPlaying,
+  getLastNowPlaying
 } from "../services/store.js";
 
 export type NowPlayingState = {
@@ -41,9 +42,14 @@ router.get("/:channelId", (req: express.Request, res: express.Response) => {
   if (typeof channelId !== "string") {
     return res.status(400).json({ error: "Invalid channelId" });
   }
-  const current = getNowPlayingByChannelId(channelId);
+  let current = getNowPlayingByChannelId(channelId);
   if (!current) {
-    return res.status(404).json({ error: "No now playing data" });
+    // Fallback: return the most recent now playing from any channel
+    current = getLastNowPlaying();
+    if (!current) {
+      return res.status(404).json({ error: "No now playing data" });
+    }
+    return res.status(200).json({ ...current, fallback: true });
   }
   return res.status(200).json(current);
 });
