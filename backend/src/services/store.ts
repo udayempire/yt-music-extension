@@ -22,7 +22,19 @@ export type NowPlayingState = {
 const nowPlayingByChannel = new Map<string, NowPlayingState>();
 
 export function upsertNowPlaying(state: NowPlayingState): void {
-	nowPlayingByChannel.set(state.channelId, state);
+  const previous = nowPlayingByChannel.get(state.channelId);
+  const isSameTrack =
+    !!previous &&
+    previous.title === state.title &&
+    previous.artists === state.artists;
+
+  // Keep the last known song URL if the same track is still active but current DOM no longer exposes a link.
+  const mergedState: NowPlayingState =
+    isSameTrack && !state.songUrl && previous.songUrl
+      ? { ...state, songUrl: previous.songUrl }
+      : state;
+
+  nowPlayingByChannel.set(state.channelId, mergedState);
 }
 
 export function getNowPlayingByChannelId(
