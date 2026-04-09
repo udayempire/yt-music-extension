@@ -1,7 +1,7 @@
 import type { NowPlayingUpdateRequest } from "../../shared/types/now-playing";
 import type { ExtensionMessage } from "./types";
 
-const API_BASE_URL = "https://yt-music-extension.onrender.com";
+const API_BASE_URL = "https://api.ytmusic-extension.udayempire.me";
 const API_TOKEN = "Q7mN2xLp8Vt4Rk1Z";
 
 async function postNowPlaying(body: NowPlayingUpdateRequest): Promise<void> {

@@ -3,7 +3,7 @@
   "name": "YT Music Now Playing",
   "version": "1.0",
   "permissions": [],
-  "host_permissions": ["https://music.youtube.com/*", "http://localhost:4000/*","https://yt-music-extension.onrender.com/*"],
+  "host_permissions": ["https://music.youtube.com/*", "http://localhost:4000/*","https://api.ytmusic-extension.udayempire.me/*"],
   "background": {
     "service_worker": "dist/background.js"
   },
