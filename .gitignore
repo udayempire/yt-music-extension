@@ -29,3 +29,6 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Future docs (not for GitHub)
+FUTURE_WORK.md

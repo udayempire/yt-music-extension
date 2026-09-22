@@ -106,7 +106,7 @@ Then load the unpacked extension in Chrome:
 
 ## API Reference
 
-Base URL: `https://api.ytmusic-extension.udayempire.me` (or `http://localhost:4000` locally)
+Base URL: `https://your-api-domain.com` (or `http://localhost:4000` locally)
 
 ### `GET /health`
 
@@ -221,7 +221,7 @@ type NowPlayingState = {
 CORS is configured to allow:
 - The specific Chrome extension origin
 - `http://localhost:3000` / `http://localhost:5173` (local dev)
-- `https://udayempire.me` (production site)
+- `https://your-domain.com` (production site)
 
 ---
 
